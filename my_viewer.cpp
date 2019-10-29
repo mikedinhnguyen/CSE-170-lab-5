@@ -1,4 +1,4 @@
-﻿
+
 // CSE170 Completed PA4 - Ritesh Sharma and Marcelo Kallmann
 
 # include "my_viewer.h"
@@ -16,7 +16,7 @@ MyViewer::MyViewer ( int x, int y, int w, int h, const char* l ) : WsViewer(x,y,
 	_torus_n = 10;
 	_torus_R = 1.0f;
 	_torus_r = 0.2f;
-	cycle_textures = 3
+	texturewhichcake = 3;
 	_flat=true;
 	build_ui ();
 	build_scene ();
@@ -122,16 +122,19 @@ void MyViewer::add_texture(bool image) {
 	g.fn = m.F.size();
 	g.dmap = new GsModel::Texture;
 
-	int whichcake = cycle_textures % 3;
+	int whichcake = texturewhichcake % 3;
 
 	if (whichcake == 0) {
-		g.dmap->fname.set("../../rainbow.jpg");
+		g.dmap->fname.set("C:/Users/MichaelNguyen/Downloads/rainbow.jpg");
+		//g.dmap->fname.set("../../rainbow.jpg");
 	}
 	if (whichcake == 1) {
-		g.dmap->fname.set("../../checkers.jpg");
+		g.dmap->fname.set("C:/Users/MichaelNguyen/Downloads/stone.jpg");
+		//g.dmap->fname.set("../../stone.jpg");
 	}
 	if (whichcake == 2) {
-		g.dmap->fname.set("../../void.jpg");
+		g.dmap->fname.set("C:/Users/MichaelNguyen/Downloads/wood.jpg");
+		//g.dmap->fname.set("../../wood.jpg");
 	}
 
 	m.M.push().init();
@@ -195,11 +198,20 @@ int MyViewer::handle_keyboard ( const GsEvent &e )
 		case 'z': _flat=true; make_torus(_flat); break;
 		case 'x': _flat=false; make_torus(_flat); break;
 
-		case GsEvent::KeySpace: cycle_textures++; add_texture(true); break;
+		case GsEvent::KeySpace: 
+			texturebool = true;
+			texturewhichcake++; 
+			make_torus(_flat);
+			add_texture(true); 
+			break;
 
 		case 'c': _normals->visible(true); make_normals(_flat); break;
 		case 'v': _normals->visible(false); break;
 		default: gsout<<"Key pressed: "<<e.key<<gsnl;
+	}
+	if (texturebool == true) {
+		make_torus(_flat);
+		add_texture(true);
 	}
 	render();
 	return 0;
