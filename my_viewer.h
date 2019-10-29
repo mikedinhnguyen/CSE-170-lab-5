@@ -12,6 +12,7 @@ class MyViewer : public WsViewer
 	enum MenuEv { EvNormals, EvSlider, EvExit };
 	UiSlider* _slider;
 	int _torus_n;
+	int cycle_textures;
 	float _torus_R, _torus_r;
 	SnModel *_torus;
 	SnLines *_normals;
