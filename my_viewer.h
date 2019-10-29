@@ -12,11 +12,12 @@ class MyViewer : public WsViewer
 	enum MenuEv { EvNormals, EvSlider, EvExit };
 	UiSlider* _slider;
 	int _torus_n;
-	int cycle_textures;
+	int texturewhichcake;
 	float _torus_R, _torus_r;
 	SnModel *_torus;
 	SnLines *_normals;
 	bool _flat;
+	bool texturebool;
    public :
 	MyViewer ( int x, int y, int w, int h, const char* l );
 	void build_ui ();
