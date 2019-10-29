@@ -16,6 +16,7 @@ MyViewer::MyViewer ( int x, int y, int w, int h, const char* l ) : WsViewer(x,y,
 	_torus_n = 10;
 	_torus_R = 1.0f;
 	_torus_r = 0.2f;
+	cycle_textures = 3
 	_flat=true;
 	build_ui ();
 	build_scene ();
@@ -121,7 +122,7 @@ void MyViewer::add_texture(bool image) {
 	g.fn = m.F.size();
 	g.dmap = new GsModel::Texture;
 
-	int whichcake = texturecakecounter % 3;
+	int whichcake = cycle_textures % 3;
 
 	if (whichcake == 0) {
 		g.dmap->fname.set("../../rainbow.jpg");
@@ -194,7 +195,7 @@ int MyViewer::handle_keyboard ( const GsEvent &e )
 		case 'z': _flat=true; make_torus(_flat); break;
 		case 'x': _flat=false; make_torus(_flat); break;
 
-		case GsEvent::KeySpace: add_texture(true); break;
+		case GsEvent::KeySpace: cycle_textures++; add_texture(true); break;
 
 		case 'c': _normals->visible(true); make_normals(_flat); break;
 		case 'v': _normals->visible(false); break;
